@@ -18,6 +18,6 @@
       - Print
       - Map
       - Foldl'
-  - Lists are monads
-- Cool now that we've gotten that under our belt, we can start tinkering with Haskell. We now understand the basic structure of a Haskell app and how Haskell handles inputs/outputs. We learned how lists can be iterated over since we don't have language defined loops in Haskell. We mentioned monads, which can trip up a lot of people learning Haskell, but fear not.
+  - ~~Lists are monads~~
+- Cool now that we've gotten that under our belt, we can start tinkering with Haskell. We now understand the basic structure of a Haskell app and how Haskell handles inputs/outputs. We learned how lists can be iterated over since we don't have language defined loops in Haskell. ~~We mentioned monads, which can trip up a lot of people learning Haskell, but fear not.~~
 - Questions?
