@@ -1,0 +1,17 @@
+version: "3"
+services:
+  list-demo:
+    build: ../containers/haskell
+    volumes:
+      - stack-root:/stack-root
+      - .:/Users/camerongera/Projects/meet-ups/Feb2018/list-demo
+    working_dir: /Users/camerongera/Projects/meet-ups/Feb2018/list-demo
+    command: ["stack", "build", "--fast", "--exec", "list-demo-exe"]
+    tty: true
+
+# Note: these volume definitions are duplicated in
+# the docker-compose.local.yml for convenience. Sharing
+# definitions in a common file is more cumbersome than
+# managing the duplication right now.
+volumes:
+  stack-root:

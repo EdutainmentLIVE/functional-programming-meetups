@@ -1,0 +1,23 @@
+## Intro to Haskell
+
+- What is Haskell and why would you choose to program in it?
+  - Haskell is a statically type, lazy, purely functional programming language. Named after Haskell Brooks Curry, famous mathematician.
+  - You'd program in it if you are looking for a language that minimizes runtime exceptions and if you are wired for mathematics. There are definitely other reasons, but we will get into those later.
+- Well now that we know what Haskell is, what are we going to look at today?
+  - We are going to look at a simple Hello Haskell app and discuss some of the basics.
+  - We will also talk about lists and why they are a monad. We will show how we handle iterating over lists in Haskell.
+  - Also since I come from a background of JavaScript, I'll take a few minutes to show some of the safety that Haskell offers vs JS.
+- Hello Haskell, Huh?
+  - Yep! I'm going to be running these apps in docker, but I'm not going to touch on that today. Eventually we will do a series on creating a Haskell app, but that's not for today.
+  - I created these file structure using Haskell's Stack program, which helps with building, testing. and developing your project.
+  - If we start by looking at the main executable, AKA Main.hs, we can see that we call a function that is imported from the HelloHaskell module. Before we go there, I want to look at the type signature that main returns. It returns IO () (`Unit`), which is a Monad and generates input and output. For this case, we will just be outputting a simple string.
+  - Now lets look at the HelloHaskell Module. We see that it exports the function we are calling in main, then we see our helloHaskell function. As you can see the type that helloHaskell returns is IO (). putStrLn is a function that takes a string and prints.
+- Okay, so we print a string, cool, how would we deal with a lists since there are no loops in Haskell?
+  - Well this is going to be a minimal example of the power of lists in Haskell, but it will give you a sense of what power Haskell has over lists.
+  - So we look at main, it looks very similar to the helloHaskell executable, but the difference here is in our ListHandler module. First we see that our first function returns IO () but this is really for demo purposes so we can easily print the results. The `do` here at the beginning gives us a little imperative vibes, but it's useful when needing to chain functions that return the same type together.
+  - First we just print the list which is defined in the function sampleList. Simple enough.
+  - The cool stuff comes into play with calling map with a function over that list. This map iterates over the list and applies the function to each value and returns a new lists of the results. This is very similar to the `map` in ES6, but heres a difference. If I change one of these numbers to a string, we won't even compile. In JavaScript, I'd get a gnarly runtime exception, but here Haskell doesn't even let me get that far. I find it super helpful.
+  - Next I've got a simple fold function that will apply the sum operator over the list and adds zero to the result. This is great for retrieving sums of large lists.
+  - Something I want to talk about for a moment is that lists in Haskell are monads. Meaning they can be used for nondeterministic computations that can produce a varying number of results. [NEED MORE HERE!]
+- Cool now that we've gotten that under our belt, we can start tinkering with Haskell. We now understand the basic structure of a Haskell app and how Haskell handles inputs/outputs. We learned how lists can be iterated over since we don't have language defined loops in Haskell. We mentioned monads, which can trip up a lot of people learning Haskell, but fear not.
+- Questions?
