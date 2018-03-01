@@ -2,11 +2,10 @@
 
 ## 1. Why Does Functional Programming Matter?
 
-Let me get this out of the way early: you're going to end up writing some imperative code in your functional language, and you're going to end up writing functional code in your imperative language. We're not trying to say imperative is the worst, or there's never any place for OOP. We are saying, however, that we don't want to have to be the ones to write it :)
+Programmers want to be more productive, sometimes obsessively so. There are literally questions on Quora and StackOverflow about which font size will make me the most productive. Functional programming has made us at ITProTV more productive, in a matter of months. We adopted Elm in October, and Haskell in late November. Before that, we were primarily imperative, JavaScript developers, but at this point, if we had to estimate the exact same story using Haskell or using JavaScript, we would all throw lower numbers for Haskell. And that's just 3 months! Imagine how much more productive we're going to feel in a year.
 
-Programmers want to be more productive, sometimes obsessively so. There are literally questions on Quora and StackOverflow about which font size will make me the most productive. Functional programming has made us at ITProTV more productive, in a matter of months. We adopted Elm in October, and Haskell in late November. At this point, if we had to estimate the exact same story using Haskell or using JavaScript, we would all throw lower numbers for Haskell. And that's just 3 months! Imagine how much more productive we're going to feel in a year.
 
-Why are we more productive with functional programming? Functional programming is going to make you more productive through a variety of means, and we'll scratch the surface on many of them right now. Here's a quick list to get started:
+Functional programming is going to make you more productive through a variety of means, and we'll scratch the surface on many of them right now. I'm going to list common characteristics of functional languages, then we'll go into more depth on each.
 
 1. Pure functions
 1. And therefore, memoization
@@ -21,11 +20,13 @@ While object-oriented languages are not necessarily imperative (think of the cha
 
 A pure function has 2 characteristics: 1) it always evaluates the same result value given the same argument value(s), and 2) it does not cause side effects when evaluated.
 
-Any function that uses a non-local variable is potentially impure, for example `increment x = x + a`. The value of `increment` depends on the value of `a`, which could be anything at any point in the program. 
+Any function that uses a non-local variable is potentially impure, for example `increment x = x + a`. The value of `increment` depends on the value of `a`, which could be anything at any point in the program.
 
 A side effect is the modification of some kind of state, such as changing the value of a variable.
 
+
 Pure functions are easier to think about because you can assume they won't make changes to anything else. You can trust your functions, unlike in OOP where a function can, and often must, generate side effects, or depend on state that may change before the next time you evaluate it.
+
 
 ### Memoization
 
@@ -72,23 +73,29 @@ console.log(factorial(4));
 //=> 24
 ```
 
-This doesn't necessarily increase your poductivity, but it's pretty cool.
+
+This doesn't necessarily increase your poductivity, but it's pretty cool. And you get it for free in many functional languages, you don't have to create your own `memoize` function like we did in the above JavaScript example.
 
 ### Type Signature
 
-For Haskell, a type signature looks like this,
+For Haskell, a type signature looks like this first line,
 
 ```Haskell
-exampleFunction :: Int -> Int -> Int -- Type Signature
+exampleFunction :: Int -> Int -> Int
 exampleFunction x y = x * y
 ```
 
-It takes a little bit of time to learn how to read this, but once you do, you'll realize that type signatures make code clearer and safer. In this example function, you can instantly tell that it takes 2 integers and returns an integer. That's pretty simple, but in Haskell you can define new types, such as `Age`, and say that it's a non-negative integer less than 120. Then you can do something very 'safe', like this:
+It takes a little bit of time to learn how to read this, but once you do, you'll realize that type signatures make code clearer and safer. In this example function, it's telling you that it takes 2 integers and returns an integer. So let's break down the type signature. The first thing in the type signature is the function name, and then the double-colon. All type signatures start like that. But what comes after the double-colon will change from function to function. To keep things simple, I am skipping a little bit, but for now let's say that the first thing that comes after the double-colon is the first argument to the function, and then a right arrow, then another argument, another arrow, and so on. The very last thing in the type signature is the value that the function will return when executed.
+
+ That's pretty simple, but in Haskell you can define new types, such as `Age`, and say that it's a non-negative integer less than 120. Then you can do something very 'safe', like this:
 
 ```Haskell
 ageInMonths :: Age -> Int
 ageInMonths age = age * 12
 ```
+
+The type signature is telling you that it takes an Age, not an integer, and returns an integer.
+
 
 This function is guaranteed to be safer than a function that takes an Int, or worse, any type, like in JavaScript. And it's easy to see at a glance what the function is doing. You don't need as much documentation, and you don't need nearly as much testing, which will make you more productive.
 
@@ -97,10 +104,10 @@ This function is guaranteed to be safer than a function that takes an Int, or wo
 ```haskell
 fibGen :: Int -> Int -> [Int]
 fibGen x y = x:fibGen y (x + y)
- 
+
 -- this creates an infinite list with all fibonacci numbers
 allFibs = fibGen 1 1
- 
+
 -- lets print the first 10
 take 10 allFibs
 -> [1,1,2,3,5,8,13,21,34,55]
@@ -110,34 +117,34 @@ vs.
 
 ```java
 class FibGen : Iterator<Integer> {
-	
+
 	private int x;
 	private int y;
- 
+
     Iterator (int x,  int y) {
 		this.x = x;
 		this.y = y;
     }
- 
+
     public boolean hasNext() {
 		return true;
     }
- 
+
     public Integer next() {
 		int x0 = x;
- 
+
         x = y;
         y = (x0 + y);
-        
+
 		return x0;
     }
- 
+
 	void remove()
 	{
 		throw new UnsupportedOperationException();
     }
 }
- 
+
 ...
 FibGen fib = new FibGen(1, 1);
 for (int i=0 ; i< 10;  i++)
@@ -179,20 +186,22 @@ reverse a -- [3, 2, 1]
 a -- [1, 2, 3]
 ```
 
-Immutability will make you more productive because you'll have
 
-- less bugs
-- no invalid state
-- an easier time testing
-- more readable and maintainable code
+First, it's easier to think through code when you don't have to try to figure out what the value of a variable is at any given point in the code. You don't do as much mental juggling on the unimportant stuff, so you'll create less bugs, and your code is more maintainable. It's also much more difficult to create an invalid state, where a variable is referenced and yet it doesn't exist yet, for instance. You'll have an easier time testing because of this, as well.
 
 ### Parallelism
+
+The last in our list (which remember, is not exhaustive), is parallelism. What I mean is, running multiple threads at the same time. Processor speeds have started to plateau recently, and unless something changes, it's difficult to see how processors will get much faster. Instead, we're going to have to rely on multi-core processors. But very few apps are making good use of more than one core at a time, and part of the reason is that it's note easy to get imperative programming to play nice with multiple cores. Functional programming, on the other hand, plays very nice due to parallelism.
+
+Parallelism is easier in a functional language because they usually include two characteristics that we've already talked about: no side effects, and immutability. If there are no side effects and everything is immutable, it doesn't matter if things are done in a different order.
+
+This is another characteristic, like memoization, that doesn't necessarily make you more productive, but it is a really powerful feature of functional programming. But let me make a caveat: fully automatic parallelization by a compiler is still a ways off, though functional languages are better equip to make use of it, and are already making limited use of automatic parallelization
 
 #### Extending existing programs
 
 (I totally ripped this from a Quora questions)
 
-One other fundamental difference that hasn't been mentioned before, and that IS specific to OO vs. functional, involves the extension of existing programs. To see this, suppose you want to model something that appears in multiple different forms; say, a spaceship in a game that features a bunch of different kinds of spaceships, each with different characteristics and capabilities.
+One other fundamental difference involves extending an existing program. To see this, suppose you want to model something that appears in multiple different forms; say, a spaceship in a game that features a bunch of different kinds of spaceships, each with different characteristics and capabilities.
 
 A traditional functional approach might be to define a data type with one variant for each kind of ship. Then, to implement the ships' behavior, you'd write some functions that operate on instances of that ship data, and most of those functions will have some conditional branching to determine what kind of ship they've received as input.
 
@@ -202,30 +211,12 @@ Suppose you want to add a new kind of ship. In the functional program, you'd hav
 
 Suppose you want to add a new capability to the ships -- say, a way to upgrade a ship's weapons during the game. In the OO program, you'd add a method to the superclass if you're lucky and all ships should have the same behavior; if they shouldn't, then you need to add a method to each ship's subclass. In the functional program, you'd write a new function that deals with all the variants listed by the definition of your data type. That's likely easier.
 
-## 1. Common Features of Functional Programming
+## 2. What are some of the drawbacks with Functional Programming?
 
-Make a list of all the common features of functional programming, give a 
-brief definition, and provide examples of languages that contain the
-feature.
+It can be difficult to learn because it's a different paradigm than imperative programming, and if you're not coming from a math background it can be confusing. There are terms like `monad`, `functor`, etc. Consider this fun sentence, `All told, a monad in X is just a monoid in the category of endofunctors of X, with product × replaced by composition of endofunctors and unit set by the identity endofunctor.` If any of you understand that sentence, you're hired. I don't understand it yet.
 
-1. Currying and Partial Application
+But these are all subjective things that come down to people's experience and preference. Some of the actual issues of functional programming include the fact that pure functions and IO don't mix. By definition these two things are mutually exclusive. So now you're stuck in a place where you either have to use a functional language to deal with IO, which can sometimes feel like digging a ditch with a ball-peen hammer, or not dealing with IO, which is not easy. And the last issue is that using a lot of immutable values and recursion can use up enough RAM that it causes some real slowdown.
 
-## 1. Example Languages
+Beyond these two issues, however, anything else is language-specific.
 
-List the most popular functional languages, and mention that many other
-languages allow for functional programming, but they don't insist on it.
-
-1. Haskell
-1. Elm
-1. Standard ML
-
-## 1. Benefits
-
-1. Compiler
-1. 
-
-## 1. Issues
-
-List the issues with functional programming
-
-1. Not as common?
+So I hope I was able to communicate how functional programming will make you more productive as a developer. Functional languages have several characteristics, including pure functions, memoization, type signature, lazy evaluation, immutability, and parallelism, that make it easier to write concise, bug-free code that is easier to reason about.
