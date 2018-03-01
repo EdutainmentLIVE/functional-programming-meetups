@@ -3,4 +3,4 @@ module HelloHaskell
     ) where
 
 helloHaskell :: IO ()
-helloHaskell = "Hello Haskell!"
+helloHaskell = putStrLn "Hello Haskell!"
