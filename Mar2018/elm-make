@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo ""
+echo "=== Building ==="
+echo ""
+
+docker-compose run --rm frontend

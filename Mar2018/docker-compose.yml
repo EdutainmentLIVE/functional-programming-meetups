@@ -1,0 +1,29 @@
+version: "3"
+services:
+  frontend:
+    image: codesimple/elm:0.18
+    command:
+      - make
+      - Main.elm
+      - --yes
+      - --output
+      - /elm-pub-sub/assets/Main.js
+    volumes:
+      - .:/elm-pub-sub
+    working_dir: /elm-pub-sub/frontend
+
+  backend:
+    image: flipstone/stack:v1-1.6.5
+    volumes:
+      - .:/elm-pub-sub
+      - stack-root:/stack-root
+    working_dir: /elm-pub-sub/backend
+    ports:
+      - 8000:8000
+    command:
+      - bash
+      - -c
+      - "stack install && stack exec backend-exe"
+
+volumes:
+  stack-root:

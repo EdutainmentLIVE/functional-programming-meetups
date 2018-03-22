@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+set -ex
+
+fswatch -o frontend/Main.elm | xargs -n1 ./elm-make
+
