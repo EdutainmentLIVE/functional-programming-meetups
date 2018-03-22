@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gainesville Functional Programming</title>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script src="/Main.js"></script>
+  </head>
+  <body>
+    <script>
+      // Enable pusher logging - don't include this in production
+      // Pusher.logToConsole = true;
+
+      var pusher = new Pusher('1234567890abcdef1234', {
+        cluster: 'us2',
+        encrypted: true
+      });
+
+      var channel = pusher.subscribe('private-messages');
+      var app = Elm.Main.fullscreen();
+
+      channel.bind('client-message-post', function(data) {
+        app.ports.messagePosted.send(data);
+      });
+
+      app.ports.trigger.subscribe(function(data) {
+        channel.trigger('client-message-post', data);
+      });
+
+    </script>
+  </body>
+</html>
