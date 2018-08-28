@@ -1,0 +1,19 @@
+backgroundColorRed {
+  background-color: red;
+}
+
+margin5rem {
+  margin: 5rem;
+}
+
+displayInlineBlock {
+  display: inline-block;
+}
+
+willNotWorkSadPanda {
+  foo: bar;
+}
+
+paddingTop5rem {
+  padding-top: 5rem;
+}
