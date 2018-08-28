@@ -1,0 +1,5 @@
+{
+  "haskero.intero.stackPath": "stack",
+  "haskell.hlint.executablePath": "hlint",
+  "hindent-format.command": "hindent",
+}
