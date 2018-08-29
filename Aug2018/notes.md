@@ -1,5 +1,21 @@
 # Elm and CSS
 
+## Announcements
+
+### Other Meetups
+
+- Tech on Tap tomorrow night
+- Gainesville UX Design Tuesday night
+- Frontend Awesome
+- Python Ninjas
+- Gainesville JS (not very active right now)
+- Hackerspace
+
+### GitHub Repo
+- https://github.com/EdutainmentLIVE/functional-programming-meetups
+
+## Introduction
+
 There are a few ways to do CSS in your Elm app, some obvious, some less obvious. Tonight we're going
 to look at one of the bad options :)
 
