@@ -25,3 +25,9 @@ fontSize3rem = style "font-size" "3rem"
 
 paddingX2rem : Attribute msg
 paddingX2rem = style "padding" "0 2rem"
+
+incrementDisplay : List (Attribute msg)
+incrementDisplay = [fontSize3rem, backgroundColorRed, displayInlineBlock]
+
+sarasDogStyling : List (Attribute msg)
+sarasDogStyling = [willNotWorkSadPanda, paddingTop5rem, displayInlineBlock]

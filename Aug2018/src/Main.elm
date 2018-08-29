@@ -45,11 +45,11 @@ view mdl =
 buttonsAndInt : Model -> Html Msg
 buttonsAndInt mdl =
     div []
-        [ button [ CSS.fontSize3rem, onClick Decrement ] [ text "-" ]
+        [ button [ onClick Decrement ] [ text "-" ]
         , div
-            [ CSS.fontSize3rem, CSS.backgroundColorRed, CSS.displayInlineBlock ]
+            [ CSS.backgroundColorRed, CSS.displayInlineBlock ]
             [ text (String.fromInt mdl) ]
-        , button [ CSS.fontSize3rem, onClick Increment ] [ text "+" ]
+        , button [ onClick Increment ] [ text "+" ]
         ]
 
 
